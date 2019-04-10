@@ -5,22 +5,24 @@ void drawtile(int motif) {
    0: \    1: /   2: -   3: |   4: +.   5: x.   6: +
    7: fne  8: fsw   9: fnw  10: fse  11: tn  12: ts  13: te  14: tw
   */
+  int[] colors = { 0, 255 };
+
   float x = width/2;
   float y = height/2;
-  float w = width/3;
-  float h = height/3;
+  float w = width/2;
+  float h = height/2;
 
-  float smallr =  w / 6;
-  float bigr =  w / 3;
+  float smallr =  2 * w / 6;
+  float bigr =  2 * w / 3;
   float arcd = 2 * 2 * w / 3;
 
   noStroke();
   rectMode(CENTER);
   //fill(this.color[1]);
-  fill(255); //bg
+  fill(colors[1]); //bg
   rect(x, y, w, h);
   //fill(this.color[0]);
-  fill(0); //fg
+  fill(colors[0]); //fg
 
   switch(motif){
     case 0: // '\'
@@ -28,53 +30,74 @@ void drawtile(int motif) {
       arc(x - w/2, y + h/2, arcd, arcd, 3 * PI / 2, 2 * PI);
       break;
     case 1: // '/'
+      arc(x - w/2, y - h/2, arcd, arcd, 0, PI / 2);
+      arc(x + w/2, y + h/2, arcd, arcd, PI, 3 * PI / 2);
       break;
     case 2: // '-'
+      rect(x, y, w, smallr);
       break;
     case 3: // '|'
+      rect(x, y, smallr, h);
       break;
     case 4: // '+.'
       break;
     case 5: // 'x.'
+      fill(colors[0]);
+      rect(x, y, w, h);
       break;
     case 6: // '+'
+      rect(x, y, w, smallr);
+      rect(x, y, smallr, h);
       break;
     case 7: // 'fne'
+      arc(x + w/2, y - h/2, arcd, arcd, PI / 2, PI);
       break;
     case 8: // 'fsw'
+      arc(x - w/2, y + h/2, arcd, arcd, 3 * PI / 2, 2 * PI);
       break;
     case 9: // 'fnw'
+      arc(x - w/2, y - h/2, arcd, arcd, 0, PI / 2);
       break;
     case 10: // 'fse'
+      arc(x + w/2, y + h/2, arcd, arcd, PI, 3 * PI / 2);
       break;
     case 11: // 'tn'
+      fill(colors[0]);
+      rect(x, y-smallr/2, w, bigr);
       break;
     case 12: // 'ts'
+      fill(colors[0]);
+      rect(x, y + smallr/2, w, bigr);
       break;
     case 13: // 'te'
+      fill(colors[0]);
+      rect(x + smallr/2, y, bigr, h);
       break;
     case 14: // 'tw'
+      fill(colors[0]);
+      rect(x - smallr/2, y, bigr, h);
       break;
-
-
     default:
       println("Invalid motif");
   }
 
   //fill(this.color[1]);
-  fill(255);
+  fill(colors[1]);
   ellipse(x - w/2, y - h/2, bigr, bigr);
   ellipse(x + w/2, y - h/2, bigr, bigr);
   ellipse(x - w/2, y + h/2, bigr, bigr);
   ellipse(x + w/2, y + h/2, bigr, bigr);
 
   //fill(this.color[0]);
-  fill(0);
+  fill(colors[0]);
   ellipse(x, y - h/2, smallr, smallr);
   ellipse(x + w/2, y, smallr, smallr);
   ellipse(x, y + h/2, smallr, smallr);
   ellipse(x - w/2, y, smallr, smallr);
+
 }
+
+int nt=11;
 
 void setup() {
   background(127);
@@ -83,5 +106,13 @@ void setup() {
 }
 
 void draw() {
+  background(127,32);
+  drawtile(nt);
+  stroke(0,255,0); noFill();
+  rectMode(CENTER);
+  rect(width/2, height/2, width/2, height/2);
+}
 
+void mouseClicked() {
+  nt = (nt + 1) % 15;
 }
