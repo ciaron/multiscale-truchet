@@ -110,29 +110,34 @@ void setup() {
   int tilesize = (width - 2*border) / rc; // assume width and height equal
 
   // generate some base tiles
-  for (int x=border+tilesize/2; x<width-border; x+=tilesize) {
-    for (int y=border+tilesize/2; y<height-border; y+=tilesize) {
-      rects.add(new Rectangle(x, y, tilesize, tilesize));
-    }
-  }
+  // for (int x=border+tilesize/2; x<width-border; x+=tilesize) {
+  //   for (int y=border+tilesize/2; y<height-border; y+=tilesize) {
+  //     rects.add(new Rectangle(x, y, tilesize, tilesize));
+  //   }
+  // }
+
+  // initial "root" QuadTree
+  qt = new QuadTree(new Rectangle(width/2, height/2, tilesize, tilesize), 0, floor(random(0.0, 15.0)));
 }
 
 void draw() {
   background(0);//127,32);
 
-  for (Rectangle r : rects) {
-    drawtile(floor(random(0.0, 15.0)), r, colors);
-    r.draw();
-  }
-  noLoop();
+  //for (Rectangle r : rects) {
+  //  drawtile(floor(random(0.0, 15.0)), r, colors);
+  //  r.draw();
+  //}
+  //noLoop();
+  qt.show();
 }
 
 void mouseClicked() {
-  loop();
+  qt.insert(new PVector(mouseX, mouseY));
+  println("insert");
 }
 
 void keyPressed() {
   if (key == ' ') {
-    loop();
+    //loop();
   }
 }
