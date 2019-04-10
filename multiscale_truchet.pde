@@ -99,6 +99,7 @@ int border = 120;
 int rc = 1; //rows and columns
 ArrayList<Rectangle> rects;
 int[] colors = { 0, 255 };
+QuadTree qt;
 
 void setup() {
   size(800, 800);
@@ -118,7 +119,7 @@ void setup() {
 
 void draw() {
   background(0);//127,32);
-  
+
   for (Rectangle r : rects) {
     drawtile(floor(random(0.0, 15.0)), r, colors);
     r.draw();
