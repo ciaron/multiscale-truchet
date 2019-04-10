@@ -1,12 +1,10 @@
-void drawtile(int motif, Rectangle boundary) {
+void drawtile(int motif, Rectangle boundary, int[] colors) {
   /* The 15 motifs are numbered in the same order they appear in the
      Bridges 2018 paper by Christopher Carlson
 
    0: \    1: /   2: -   3: |   4: +.   5: x.   6: +
    7: fne  8: fsw   9: fnw  10: fse  11: tn  12: ts  13: te  14: tw
   */
-  int[] colors = { 0, 255 };
-
   float x = boundary.x;
   float y = boundary.y;
   float w = boundary.w;
@@ -19,10 +17,10 @@ void drawtile(int motif, Rectangle boundary) {
   noStroke();
   rectMode(CENTER);
   //fill(this.color[1]);
-  fill(colors[1]); //bg
+  fill(colors[0]); //bg
   rect(x, y, w, h);
   //fill(this.color[0]);
-  fill(colors[0]); //fg
+  fill(colors[1]); //fg
 
   switch(motif){
     case 0: // '\'
@@ -62,19 +60,19 @@ void drawtile(int motif, Rectangle boundary) {
       arc(x + w/2, y + h/2, arcd, arcd, PI, 3 * PI / 2);
       break;
     case 11: // 'tn'
-      fill(colors[0]);
+      fill(colors[1]);
       rect(x, y-smallr/2, w, bigr);
       break;
     case 12: // 'ts'
-      fill(colors[0]);
+      fill(colors[1]);
       rect(x, y + smallr/2, w, bigr);
       break;
     case 13: // 'te'
-      fill(colors[0]);
+      fill(colors[1]);
       rect(x + smallr/2, y, bigr, h);
       break;
     case 14: // 'tw'
-      fill(colors[0]);
+      fill(colors[1]);
       rect(x - smallr/2, y, bigr, h);
       break;
     default:
@@ -82,24 +80,25 @@ void drawtile(int motif, Rectangle boundary) {
   }
 
   //fill(this.color[1]);
-  fill(colors[1]);
+  fill(colors[0]);
   ellipse(x - w/2, y - h/2, bigr, bigr);
   ellipse(x + w/2, y - h/2, bigr, bigr);
   ellipse(x - w/2, y + h/2, bigr, bigr);
   ellipse(x + w/2, y + h/2, bigr, bigr);
 
   //fill(this.color[0]);
-  fill(colors[0]);
+  fill(colors[1]);
   ellipse(x, y - h/2, smallr, smallr);
   ellipse(x + w/2, y, smallr, smallr);
   ellipse(x, y + h/2, smallr, smallr);
   ellipse(x - w/2, y, smallr, smallr);
 }
 
-int motif = 11;
-int border = 100;
-int rc = 10; //rows and columns
+int motif;
+int border = 120;
+int rc = 1; //rows and columns
 ArrayList<Rectangle> rects;
+int[] colors = { 0, 255 };
 
 void setup() {
   size(800, 800);
@@ -108,7 +107,7 @@ void setup() {
   rects = new ArrayList<Rectangle>();
 
   int tilesize = (width - 2*border) / rc; // assume width and height equal
-  println(tilesize, border+tilesize/2);
+
   // generate some base tiles
   for (int x=border+tilesize/2; x<width-border; x+=tilesize) {
     for (int y=border+tilesize/2; y<height-border; y+=tilesize) {
@@ -119,22 +118,16 @@ void setup() {
 
 void draw() {
   background(0);//127,32);
-  //drawtile(nt);
-
+  
   for (Rectangle r : rects) {
+    drawtile(floor(random(0.0, 15.0)), r, colors);
     r.draw();
-    drawtile(floor(random(2.0, 4.0)), r);
   }
   noLoop();
-  // Draw bounding rectangle
-  //stroke(0,255,0); noFill();
-  //rectMode(CENTER);
-  //rect(width/2, height/2, width/2, height/2);
 }
 
 void mouseClicked() {
   loop();
-  //motif = (motif + 1) % 15;
 }
 
 void keyPressed() {
