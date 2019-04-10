@@ -4,32 +4,36 @@ class QuadTree {
   int level;
   int motif;
   QuadTree northwest, northeast, southwest, southeast;
+  ArrayList<PVector> points;
   Boolean divided = false;
 
   QuadTree(Rectangle _b, int _level, int _motif) {
+    points = new ArrayList<PVector>();
     boundary = _b;
     level = _level;
     motif = _motif;
   }
 
-  Boolean split(PVector p) {
-    println("splitting ", this, " at", p);
-
-    if (!this.boundary.contains(p)) {
-      return false;
+  void split(PVector p) {
+    if (!this.boundary.contains(p)){
+      return;
     }
 
-    if (!this.divided) {
+    // if (this.points.size() < 1) {
+    //   this.points.add(p);
+    // } else
+    {
+      if (!this.divided) {
         subdivide();
-    } else{
-      if (this.northwest.split(p)) return true;
-      if (this.northeast.split(p)) return true;
-      if (this.southwest.split(p)) return true;
-      if (this.southeast.split(p)) return true;
+      }
+else {
+      this.northwest.split(p);
+      this.northeast.split(p);
+      this.southwest.split(p);
+      this.southeast.split(p);
     }
-    return false;
   }
-
+}
   void subdivide() {
     float X = this.boundary.x;
     float Y = this.boundary.y;
@@ -72,7 +76,17 @@ class QuadTree {
   //     return;
   //   }
   // }
+  void print(int level) {
+    println(nf(0,level), this.boundary.x, this.boundary.y, this.boundary.w, this.boundary.h);
+    if (this.divided) {
+     northwest.print(level+1);
+     northeast.print(level+1);
+     southwest.print(level+1);
+     southeast.print(level+1);
 
+    }
+
+  }
   void show() {
 
     stroke(255);

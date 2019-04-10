@@ -129,12 +129,16 @@ void draw() {
   //}
   //noLoop();
   qt.show();
+  //if (frameCount % 360 == 0) qt.print(1);
 }
 
-void mouseReleased() {
+void mousePressed() {
   PVector p = new PVector(mouseX, mouseY);
   qt.split(p);
   //println("insert", p, qt);
+  if (mouseButton == RIGHT) {
+
+  }
 }
 
 void keyPressed() {

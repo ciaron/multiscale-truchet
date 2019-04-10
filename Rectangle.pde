@@ -12,10 +12,10 @@ class Rectangle {
   }
 
   Boolean contains(PVector p) {
-    return (p.x > this.x - this.w &&
-            p.x < this.x + this.w &&
-            p.y > this.y - this.h &&
-            p.y < this.y + this.h );
+    return (p.x > this.x - this.w/2 &&
+            p.x < this.x + this.w/2 &&
+            p.y > this.y - this.h/2 &&
+            p.y < this.y + this.h/2 );
   }
 
   Boolean intersects(Rectangle range) {
