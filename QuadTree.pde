@@ -12,20 +12,22 @@ class QuadTree {
     motif = _motif;
   }
 
-  void insert(PVector p) {
+  Boolean split(PVector p) {
+    println("splitting ", this, " at", p);
+
     if (!this.boundary.contains(p)) {
-      return;
+      return false;
     }
 
     if (!this.divided) {
         subdivide();
-    } else {
-      this.northwest.insert(p);
-      this.northeast.insert(p);
-      this.southwest.insert(p);
-      this.southeast.insert(p);
+    } else{
+      if (this.northwest.split(p)) return true;
+      if (this.northeast.split(p)) return true;
+      if (this.southwest.split(p)) return true;
+      if (this.southeast.split(p)) return true;
     }
-
+    return false;
   }
 
   void subdivide() {

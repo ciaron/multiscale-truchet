@@ -131,9 +131,10 @@ void draw() {
   qt.show();
 }
 
-void mouseClicked() {
-  qt.insert(new PVector(mouseX, mouseY));
-  println("insert");
+void mouseReleased() {
+  PVector p = new PVector(mouseX, mouseY);
+  qt.split(p);
+  //println("insert", p, qt);
 }
 
 void keyPressed() {
