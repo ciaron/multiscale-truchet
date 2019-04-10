@@ -1,4 +1,4 @@
-void drawtile(int motif) {
+void drawtile(int motif, Rectangle boundary) {
   /* The 15 motifs are numbered in the same order they appear in the
      Bridges 2018 paper by Christopher Carlson
 
@@ -7,10 +7,10 @@ void drawtile(int motif) {
   */
   int[] colors = { 0, 255 };
 
-  float x = width/2;
-  float y = height/2;
-  float w = width/2;
-  float h = height/2;
+  float x = boundary.x;
+  float y = boundary.y;
+  float w = boundary.w;
+  float h = boundary.h;
 
   float smallr =  2 * w / 6;
   float bigr =  2 * w / 3;
@@ -94,25 +94,51 @@ void drawtile(int motif) {
   ellipse(x + w/2, y, smallr, smallr);
   ellipse(x, y + h/2, smallr, smallr);
   ellipse(x - w/2, y, smallr, smallr);
-
 }
 
-int nt=11;
+int motif = 11;
+int border = 100;
+int rc = 10; //rows and columns
+ArrayList<Rectangle> rects;
 
 void setup() {
+  size(800, 800);
   background(127);
-  size(400, 400);
-  drawtile(0);
+
+  rects = new ArrayList<Rectangle>();
+
+  int tilesize = (width - 2*border) / rc; // assume width and height equal
+  println(tilesize, border+tilesize/2);
+  // generate some base tiles
+  for (int x=border+tilesize/2; x<width-border; x+=tilesize) {
+    for (int y=border+tilesize/2; y<height-border; y+=tilesize) {
+      rects.add(new Rectangle(x, y, tilesize, tilesize));
+    }
+  }
 }
 
 void draw() {
-  background(127,32);
-  drawtile(nt);
-  stroke(0,255,0); noFill();
-  rectMode(CENTER);
-  rect(width/2, height/2, width/2, height/2);
+  background(0);//127,32);
+  //drawtile(nt);
+
+  for (Rectangle r : rects) {
+    r.draw();
+    drawtile(floor(random(2.0, 4.0)), r);
+  }
+  noLoop();
+  // Draw bounding rectangle
+  //stroke(0,255,0); noFill();
+  //rectMode(CENTER);
+  //rect(width/2, height/2, width/2, height/2);
 }
 
 void mouseClicked() {
-  nt = (nt + 1) % 15;
+  loop();
+  //motif = (motif + 1) % 15;
+}
+
+void keyPressed() {
+  if (key == ' ') {
+    loop();
+  }
 }
