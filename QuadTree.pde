@@ -19,7 +19,6 @@ class QuadTree {
     if (!this.boundary.contains(p)){
       return;
     }
-
     if (!this.divided) {
         subdivide();
     } else {
@@ -52,20 +51,32 @@ class QuadTree {
 
   void show() {
 
-    //drawtile(this.motif, this.boundary, this.colors);
-    this.tile.draw();
+  }
 
-    if (this.divided) {
-      this.northwest.show();
-      this.northeast.show();
-      this.southwest.show();
-      this.southeast.show();
+  void mkqueue() {
+    Queue<Tile> drawqueue = new ArrayDeque<Tile>();
+    Queue<QuadTree> traverse = new ArrayDeque<QuadTree>();
+
+    traverse.add(this);
+
+    QuadTree node;
+
+    while (!traverse.isEmpty()){
+      node = traverse.remove();
+      if (node.divided) {
+        traverse.add(node.northwest);
+        traverse.add(node.northeast);
+        traverse.add(node.southwest);
+        traverse.add(node.southeast);
+      } else {
+        drawqueue.add(node.tile);
+      }
     }
 
-    // stroke(255);
-    // noFill();
-    // rectMode(CENTER);
-    // rect(this.boundary.x, this.boundary.y, this.boundary.w, this.boundary.h);
-
+    for (Tile t : drawqueue){
+      t.draw();
+    }
   }
+
+
 }
