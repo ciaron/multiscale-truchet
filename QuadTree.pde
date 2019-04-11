@@ -72,5 +72,11 @@ class QuadTree {
     for (Tile t : drawqueue){
       t.draw();
     }
+
+    if (showrect) {
+      for (Tile t : drawqueue){
+        t.outline();
+      }
+    }
   }
 }

@@ -13,7 +13,7 @@ class Tile {
   int[] colors = {0, 255};
 
   Tile(Rectangle _b, int _l) {
-    motif = floor(random(0.0, 15.0));
+    motif = floor(random(0, 15));
     level = _l;
 
     if (level % 2 != 0) {
@@ -22,6 +22,13 @@ class Tile {
       colors[1] = tmp;
     }
     boundary = _b;
+  }
+
+  void outline() {
+    noFill();
+    strokeWeight(1);
+    stroke(0,255,0);
+    boundary.draw();
   }
 
   void draw() {

@@ -11,7 +11,7 @@
 import java.util.Queue;
 import java.util.ArrayDeque;
 int border = 120;
-
+Boolean showrect = false;
 int tilesize;
 QuadTree qt;
 
@@ -37,5 +37,10 @@ void keyPressed() {
   if (key == ' ') {
     // re-initialise
     qt = new QuadTree(new Rectangle(width/2, height/2, tilesize, tilesize), 0);
+  }
+  if (key == 'r') {
+    // toggle show rectangles
+    showrect = !showrect;
+    println("showrect set to ", showrect);
   }
 }
