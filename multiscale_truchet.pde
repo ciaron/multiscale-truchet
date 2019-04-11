@@ -20,13 +20,12 @@ void setup() {
   background(127);
   tilesize = (width - 2*border); // assume square
   // initial "root" QuadTree
-  qt = new QuadTree( new Rectangle(width/2, height/2, tilesize, tilesize), 0 );
+  qt = new QuadTree( new Rectangle(width/2, height/2, tilesize, tilesize), 0, null);
 }
 
 void draw() {
   background(255);
   qt.show();
-
 }
 
 void mousePressed() {
@@ -42,12 +41,11 @@ void mouseWheel(MouseEvent event) {
 void keyPressed() {
   if (key == ' ') {
     // re-initialise
-    qt = new QuadTree(new Rectangle(width/2, height/2, tilesize, tilesize), 0);
+    qt = new QuadTree(new Rectangle(width/2, height/2, tilesize, tilesize), 0, null);
   }
   if (key == 'r') {
     // toggle show rectangles
     showrect = !showrect;
-    println("showrect set to ", showrect);
   }
 
   if (key == 'n') {
@@ -58,5 +56,9 @@ void keyPressed() {
   if (key == 'p') {
     // toggle show rectangles
     qt.scroll("DOWN");
+  }
+
+  if (key == 'j') {
+    qt.join(new PVector(mouseX, mouseY));
   }
 }

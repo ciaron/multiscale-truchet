@@ -5,11 +5,14 @@ class QuadTree {
   int level;
   Boolean divided = false;
 
+  QuadTree parent;
+
   // subtrees, if any
   QuadTree northwest, northeast, southwest, southeast;
 
   /* constructor */
-  QuadTree(Rectangle _b, int _level) {
+  QuadTree(Rectangle _b, int _level, QuadTree _p) {
+    parent = _p;
     boundary = _b;
     level = _level;
     this.tile = new Tile(boundary, level);
@@ -32,10 +35,10 @@ class QuadTree {
       Rectangle sw = new Rectangle(X - W/4, Y + H/4, W/2, H/2);
       Rectangle se = new Rectangle(X + W/4, Y + H/4, W/2, H/2);
 
-      northwest = new QuadTree(nw, this.level+1);
-      northeast = new QuadTree(ne, this.level+1);
-      southwest = new QuadTree(sw, this.level+1);
-      southeast = new QuadTree(se, this.level+1);
+      northwest = new QuadTree(nw, this.level+1, this);
+      northeast = new QuadTree(ne, this.level+1, this);
+      southwest = new QuadTree(sw, this.level+1, this);
+      southeast = new QuadTree(se, this.level+1, this);
 
       this.divided = true;
     } else {
@@ -43,6 +46,23 @@ class QuadTree {
       this.northeast.subdivide(p);
       this.southwest.subdivide(p);
       this.southeast.subdivide(p);
+    }
+  }
+
+  void join(PVector p) {
+    // to join this tile and its siblings
+    // just set divided=false on parent
+    if (!this.boundary.contains(p)){
+      return;
+    }
+    if (!this.divided) {
+      if (parent != null)
+        parent.divided = false;
+    } else {
+      this.northwest.join(p);
+      this.northeast.join(p);
+      this.southwest.join(p);
+      this.southeast.join(p);
     }
   }
 
