@@ -1,4 +1,5 @@
 class Tile {
+
   Rectangle boundary;
   int motif;
   int level;
@@ -13,7 +14,6 @@ class Tile {
       colors[0] = colors[1];
       colors[1] = tmp;
     }
-
     boundary = _b;
   }
 
@@ -109,6 +109,4 @@ class Tile {
     ellipse(x, y + h/2, smallr, smallr);
     ellipse(x - w/2, y, smallr, smallr);
   }
-
-
 }

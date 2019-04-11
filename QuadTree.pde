@@ -1,18 +1,14 @@
 class QuadTree {
   Rectangle boundary;
   int level;
-  //int motif;
   QuadTree northwest, northeast, southwest, southeast;
   Tile tile;
   Boolean divided = false;
-  //int[] colors = { 255, 0 };
 
   QuadTree(Rectangle _b, int _level) {
     boundary = _b;
     level = _level;
-
     this.tile = new Tile(boundary, level);
-
   }
 
   void split(PVector p) {
@@ -46,30 +42,29 @@ class QuadTree {
     southeast = new QuadTree(se, this.level+1);
 
     this.divided = true;
-
   }
 
   void show() {
 
-  }
-
-  void mkqueue() {
+    // breadth-first traversal of the QuadTree
+    // We need to draw the tiles in descending order
+    // of size (i.e. level)
     Queue<Tile> drawqueue = new ArrayDeque<Tile>();
     Queue<QuadTree> traverse = new ArrayDeque<QuadTree>();
 
     traverse.add(this);
 
-    QuadTree node;
+    QuadTree qt;
 
     while (!traverse.isEmpty()){
-      node = traverse.remove();
-      if (node.divided) {
-        traverse.add(node.northwest);
-        traverse.add(node.northeast);
-        traverse.add(node.southwest);
-        traverse.add(node.southeast);
+      qt = traverse.remove();
+      if (qt.divided) {
+        traverse.add(qt.northwest);
+        traverse.add(qt.northeast);
+        traverse.add(qt.southwest);
+        traverse.add(qt.southeast);
       } else {
-        drawqueue.add(node.tile);
+        drawqueue.add(qt.tile);
       }
     }
 
@@ -77,6 +72,4 @@ class QuadTree {
       t.draw();
     }
   }
-
-
 }
