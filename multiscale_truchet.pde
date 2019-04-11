@@ -26,6 +26,8 @@ void setup() {
 void draw() {
   background(255);
   qt.show();
+  qt.hover(new PVector(mouseX, mouseY));
+
 }
 
 void mousePressed() {

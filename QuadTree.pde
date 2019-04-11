@@ -46,6 +46,24 @@ class QuadTree {
     }
   }
 
+  Boolean hover(PVector p) {
+
+    if (!this.boundary.contains(p)) {
+      return false;
+    }
+
+    if (!this.divided) {
+      return true;
+    } else {
+      this.northwest.hover(p);
+      this.northeast.hover(p);
+      this.southwest.hover(p);
+      this.southeast.hover(p);
+    }
+    return false;
+  }
+
+
   /* Draw the tiles. This is done via a breadth-first traversal of the QuadTree
      We need to draw the tiles in descending order of size (i.e. higher levels first)
   */
@@ -75,7 +93,8 @@ class QuadTree {
 
     if (showrect) {
       for (Tile t : drawqueue){
-        t.outline();
+        t.outline(false);
+        //this.hover(new PVector(mouseX, mouseY))
       }
     }
   }

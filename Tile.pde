@@ -24,10 +24,15 @@ class Tile {
     boundary = _b;
   }
 
-  void outline() {
+  void outline(Boolean highlight) {
+
     noFill();
     strokeWeight(1);
-    stroke(0,255,0);
+    if (highlight) {
+      stroke(255,0,0);
+    } else {
+      stroke(0,255,0);
+    }
     boundary.draw();
   }
 

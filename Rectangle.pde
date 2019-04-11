@@ -20,7 +20,7 @@ class Rectangle {
   }
 
   void draw() {
-    rectMode(CENTER); noFill(); strokeWeight(1); stroke(0,255,0);
+    rectMode(CENTER);
     rect(this.x, this.y, this.w, this.h);
   }
 
