@@ -1,6 +1,9 @@
+/* inspiration and help from the JavaScript version here:
+      https://editor.p5js.org/Varyter/sketches/j23pb7_ua
+*/
+
 import java.util.Queue;
 import java.util.ArrayDeque;
-
 int border = 120;
 int rc = 1; // starting rows and columns
 
@@ -20,7 +23,7 @@ void setup() {
 
 void draw() {
   background(255);//127,32);
-  
+
   qt.mkqueue();
 
   qt.show();
