@@ -1,5 +1,12 @@
 class Tile {
 
+  /* The 15 motifs are numbered in the same order they appear in the
+     Bridges 2018 paper by Christopher Carlson
+
+   0: \    1: /   2: -   3: |   4: +.   5: x.   6: +
+   7: fne  8: fsw   9: fnw  10: fse  11: tn  12: ts  13: te  14: tw
+  */
+
   Rectangle boundary;
   int motif;
   int level;
@@ -18,12 +25,6 @@ class Tile {
   }
 
   void draw() {
-    /* The 15 motifs are numbered in the same order they appear in the
-       Bridges 2018 paper by Christopher Carlson
-
-     0: \    1: /   2: -   3: |   4: +.   5: x.   6: +
-     7: fne  8: fsw   9: fnw  10: fse  11: tn  12: ts  13: te  14: tw
-    */
 
     float x = this.boundary.x;
     float y = this.boundary.y;

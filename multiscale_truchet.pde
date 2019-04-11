@@ -1,12 +1,16 @@
-/* Inspiration and help from the JavaScript version here:
+/* Original paper on multi-scale truchet patterns:
+   https://archive.bridgesmathart.org/2018/bridges2018-39.html
+   Multi-Scale Truchet Patterns
+   Christopher Carlson
+   Proceedings of Bridges 2018: Mathematics, Art, Music, Architecture, Education, Culture
+
+   Inspiration and coding help from the JavaScript version here:
       https://editor.p5js.org/Varyter/sketches/j23pb7_ua
-   and Dan Shiffman's QuadTree Coding Train video.
-*/
+   and Dan Shiffman's QuadTree Coding Train video. */
 
 import java.util.Queue;
 import java.util.ArrayDeque;
 int border = 120;
-int rc = 1; // starting rows and columns
 
 int tilesize;
 QuadTree qt;
@@ -14,7 +18,7 @@ QuadTree qt;
 void setup() {
   size(800, 800);
   background(127);
-  tilesize = (width - 2*border) / rc; // assume square
+  tilesize = (width - 2*border); // assume square
   // initial "root" QuadTree
   qt = new QuadTree( new Rectangle(width/2, height/2, tilesize, tilesize), 0 );
 }
@@ -26,7 +30,7 @@ void draw() {
 
 void mousePressed() {
   PVector p = new PVector(mouseX, mouseY);
-  qt.split(p);
+  qt.subdivide(p);
 }
 
 void keyPressed() {
