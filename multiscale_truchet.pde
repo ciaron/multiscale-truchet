@@ -26,7 +26,6 @@ void setup() {
 void draw() {
   background(255);
   qt.show();
-  qt.hover(new PVector(mouseX, mouseY));
 
 }
 
@@ -34,7 +33,12 @@ void mousePressed() {
   PVector p = new PVector(mouseX, mouseY);
   qt.subdivide(p);
 }
-
+void mouseWheel(MouseEvent event) {
+  float e = event.getCount();
+  println(e);
+  if (e<0) qt.scroll("UP");
+  if (e>0) qt.scroll("DOWN");
+}
 void keyPressed() {
   if (key == ' ') {
     // re-initialise
@@ -44,5 +48,15 @@ void keyPressed() {
     // toggle show rectangles
     showrect = !showrect;
     println("showrect set to ", showrect);
+  }
+
+  if (key == 'n') {
+    // toggle show rectangles
+    qt.scroll("UP");
+  }
+
+  if (key == 'p') {
+    // toggle show rectangles
+    qt.scroll("DOWN");
   }
 }

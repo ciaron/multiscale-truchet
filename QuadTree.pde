@@ -63,7 +63,23 @@ class QuadTree {
     return false;
   }
 
+  void scroll(String dir) {
+    int n=1;
+    if (dir == "DOWN") n=-1;
 
+    if (this.divided) {
+      northwest.scroll(dir);
+      northeast.scroll(dir);
+      southwest.scroll(dir);
+      southeast.scroll(dir);
+    } else {
+      if (  this.hover(new PVector(mouseX, mouseY)) ) {
+        this.tile.motif = abs((this.tile.motif + n) % 15);
+      } else {
+        //qt.tile.highlight = false;
+      }
+    }
+  }
   /* Draw the tiles. This is done via a breadth-first traversal of the QuadTree
      We need to draw the tiles in descending order of size (i.e. higher levels first)
   */
@@ -83,6 +99,11 @@ class QuadTree {
         traverse.add(qt.southwest);
         traverse.add(qt.southeast);
       } else {
+        if (  qt.hover(new PVector(mouseX, mouseY)) ) {
+          qt.tile.highlight = true;
+        } else {
+          qt.tile.highlight = false;
+        }
         drawqueue.add(qt.tile);
       }
     }
@@ -93,7 +114,7 @@ class QuadTree {
 
     if (showrect) {
       for (Tile t : drawqueue){
-        t.outline(false);
+        t.outline();
         //this.hover(new PVector(mouseX, mouseY))
       }
     }

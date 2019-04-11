@@ -11,6 +11,7 @@ class Tile {
   int motif;
   int level;
   int[] colors = {0, 255};
+  Boolean highlight = false;
 
   Tile(Rectangle _b, int _l) {
     motif = floor(random(0, 15));
@@ -24,15 +25,19 @@ class Tile {
     boundary = _b;
   }
 
-  void outline(Boolean highlight) {
+  void outline() {
 
     noFill();
     strokeWeight(1);
-    if (highlight) {
+
+    if (this.highlight) {
       stroke(255,0,0);
-    } else {
-      stroke(0,255,0);
+      strokeWeight(4);
+      Rectangle h = new Rectangle(boundary.x, boundary.y, boundary.w-4, boundary.h-4);
+      h.draw();
     }
+    strokeWeight(1);
+    stroke(0,255,0);
     boundary.draw();
   }
 
