@@ -1,8 +1,12 @@
 # Multiscale Truchet Patterns
 
-This is an implementation in Processing of multiscale truchet patterns.
+This is an implementation of multiscale Truchet patterns in Processing.
 
 ![screenshot](multiscale-truchet-1.png)
+
+![screenshot](multiscale-truchet-2.png)
+
+![screenshot](multiscale-truchet-3.png)
 
 ## These are the keys/mouse controls:
 
