@@ -26,7 +26,6 @@ int[] colors = { 0, 255 };
 void setup() {
   size(800, 800);
   background(127);
-
   tilesize = (width - 2*border); // assume square
 
   // initial "root" QuadTree (boundary, level, parent)
