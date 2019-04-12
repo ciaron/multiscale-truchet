@@ -16,12 +16,11 @@
 
 import java.util.Queue;
 import java.util.ArrayDeque;
-import java.util.Arrays;
+
 int border = 120;
 Boolean showrect = false;
 int tilesize;
 QuadTree qt;
-//ArrayList<Integer> colors = new ArrayList<Integer>(Arrays.asList(0, 255));
 int[] colors = { 0, 255 };
 
 void setup() {
@@ -35,7 +34,6 @@ void setup() {
 }
 
 void draw() {
-  //background(255);
   background(colors[1]);
   qt.show();
 }
