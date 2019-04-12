@@ -8,13 +8,20 @@ class Tile {
   */
 
   Rectangle boundary;
+  //int[] motifs = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14};
+  int[] motifs = {0,1};
   int motif;
+  int idx_motif=1;
   int level;
   int[] colors = {0, 255};
   Boolean highlight = false;
 
   Tile(Rectangle _b, int _l) {
-    motif = floor(random(0, 15));
+    //motif = motifs[floor(random(0, motifs.length))];
+
+    idx_motif = floor(random(0, motifs.length));
+    motif = motifs[idx_motif];
+
     level = _l;
 
     if (level % 2 != 0) {
@@ -23,6 +30,14 @@ class Tile {
       colors[1] = tmp;
     }
     boundary = _b;
+  }
+
+  void select(String dir) {
+    if (dir == "UP") idx_motif+=1;
+    if (dir == "DOWN") idx_motif-=1;
+    int n = motifs.length;
+    motif = (idx_motif % n + n) % n;
+    println(motif, dir);
   }
 
   void outline() {

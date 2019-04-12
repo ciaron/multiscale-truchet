@@ -84,8 +84,6 @@ class QuadTree {
   }
 
   void scroll(String dir) {
-    int n=1;
-    if (dir == "DOWN") n=-1;
 
     if (this.divided) {
       northwest.scroll(dir);
@@ -94,7 +92,8 @@ class QuadTree {
       southeast.scroll(dir);
     } else {
       if (  this.hover(new PVector(mouseX, mouseY)) ) {
-        this.tile.motif = abs((this.tile.motif + n) % 15);
+        //this.tile.motif = abs((this.tile.motif + n) % 15);
+        this.tile.select(dir);
       } else {
         //qt.tile.highlight = false;
       }

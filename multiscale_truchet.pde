@@ -39,6 +39,7 @@ void mousePressed() {
 
 void mouseWheel(MouseEvent event) {
   float e = event.getCount();
+  //println(e);
   if (e<0) qt.scroll("UP");
   if (e>0) qt.scroll("DOWN");
 }
