@@ -9,28 +9,32 @@
    and Dan Shiffman's QuadTree Coding Train video.
 
    TODO:
-    - allow colour inverting.
     - set starting level (currently 1)
-
    */
 
 import java.util.Queue;
 import java.util.ArrayDeque;
+import java.util.Arrays;
 int border = 120;
 Boolean showrect = false;
 int tilesize;
 QuadTree qt;
+//ArrayList<Integer> colors = new ArrayList<Integer>(Arrays.asList(0, 255));
+int[] colors = { 0, 255 };
 
 void setup() {
   size(800, 800);
   background(127);
+
   tilesize = (width - 2*border); // assume square
-  // initial "root" QuadTree
+
+  // initial "root" QuadTree (boundary, level, parent)
   qt = new QuadTree( new Rectangle(width/2, height/2, tilesize, tilesize), 0, null);
 }
 
 void draw() {
-  background(255);
+  //background(255);
+  background(colors[1]);
   qt.show();
 }
 
@@ -71,6 +75,23 @@ void keyPressed() {
   }
 
   if (key == 'j') {
+    // reunite tiles under cursor
     qt.join(new PVector(mouseX, mouseY));
+  }
+
+  if (key == 'i') {
+    
+    // invert colours in base colorset:
+    int tmp = colors[0];
+    colors[0] = colors[1];
+    colors[1] = tmp;
+
+    // invert colours in all the tiles:
+    qt.invert();
+  }
+
+  if (key == 'x') {
+    // print Information
+    println("colorset: ", colors[0], colors[1], colors);
   }
 }

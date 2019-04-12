@@ -15,7 +15,7 @@ class QuadTree {
     parent = _p;
     boundary = _b;
     level = _level;
-    this.tile = new Tile(boundary, level);
+    this.tile = new Tile(boundary, level, colors);
   }
 
   /* Subdivide the node of QuadTree at the given x,y position (a PVector) */
@@ -63,6 +63,19 @@ class QuadTree {
       this.northeast.join(p);
       this.southwest.join(p);
       this.southeast.join(p);
+    }
+  }
+
+  void invert() {
+
+    // invert color scheme in tiles, even for divided tiles (in case we back out)
+    this.tile.invert();
+
+    if (this.divided) {
+      this.northwest.invert();
+      this.northeast.invert();
+      this.southwest.invert();
+      this.southeast.invert();
     }
   }
 

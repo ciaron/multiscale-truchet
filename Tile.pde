@@ -13,23 +13,32 @@ class Tile {
   int motif;
   int idx_motif=1;
   int level;
-  int[] colors = {0, 255};
+
+  int[] colors = { 0, 255 };
   Boolean highlight = false;
 
-  Tile(Rectangle _b, int _l) {
-    //motif = motifs[floor(random(0, motifs.length))];
+  Tile(Rectangle _b, int _l, int[] _colors) {
+
+    // make a deep copy of the colors array
+    System.arraycopy(_colors, 0, colors, 0, _colors.length);
 
     idx_motif = floor(random(0, motifs.length));
     motif = motifs[idx_motif];
 
     level = _l;
 
-    if (level % 2 != 0) {
-      int tmp = colors[0];
-      colors[0] = colors[1];
-      colors[1] = tmp;
+    if (this.level % 2 != 0) {
+      invert();
     }
+
     boundary = _b;
+  }
+
+  void invert() {
+    // invert color set.
+    int tmp = this.colors[0];
+    this.colors[0] = this.colors[1];
+    this.colors[1] = tmp;
   }
 
   void select(String dir) {

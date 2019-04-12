@@ -7,10 +7,12 @@ This is an implementation in Processing of multiscale truchet patterns.
 ## These are the keys/mouse controls:
 
  - 'r' - toggle show tiling
+ - 'i' - invert colours
  - space - reinitialise
  - Left-click: split tile under mouse
  - Right-click or 'j': reunite tiles under mouse
  - Scroll or 'n'/'p' keys: cycle through tile types
+ - 'x' - show diagnostics
 
 # Credits
 
