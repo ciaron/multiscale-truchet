@@ -9,7 +9,7 @@ class Tile {
 
   Rectangle boundary;
   //int[] motifs = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14};
-  int[] motifs = {11,12,13,14};
+  int[] motifs = {10,11,12,13};
   int motif;
   int idx_motif=1;
   int level;
