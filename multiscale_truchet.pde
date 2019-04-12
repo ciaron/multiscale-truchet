@@ -6,7 +6,13 @@
 
    Inspiration and coding help from the JavaScript version here:
       https://editor.p5js.org/Varyter/sketches/j23pb7_ua
-   and Dan Shiffman's QuadTree Coding Train video. */
+   and Dan Shiffman's QuadTree Coding Train video.
+
+   TODO:
+    - allow colour inverting.
+    - set starting level (currently 1)
+
+   */
 
 import java.util.Queue;
 import java.util.ArrayDeque;

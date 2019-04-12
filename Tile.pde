@@ -9,7 +9,7 @@ class Tile {
 
   Rectangle boundary;
   //int[] motifs = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14};
-  int[] motifs = {0,1};
+  int[] motifs = {11,12,13,14};
   int motif;
   int idx_motif=1;
   int level;
@@ -36,8 +36,8 @@ class Tile {
     if (dir == "UP") idx_motif+=1;
     if (dir == "DOWN") idx_motif-=1;
     int n = motifs.length;
-    motif = (idx_motif % n + n) % n;
-    println(motif, dir);
+    motif = motifs[(idx_motif % n + n) % n];
+    //println(motif, dir);
   }
 
   void outline() {
