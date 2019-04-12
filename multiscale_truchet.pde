@@ -30,11 +30,14 @@ void draw() {
 
 void mousePressed() {
   PVector p = new PVector(mouseX, mouseY);
-  qt.subdivide(p);
+  if (mouseButton == LEFT) {
+    qt.subdivide(p);
+  } else if (mouseButton == RIGHT) {
+    qt.join(p);
+  }
 }
 void mouseWheel(MouseEvent event) {
   float e = event.getCount();
-  println(e);
   if (e<0) qt.scroll("UP");
   if (e>0) qt.scroll("DOWN");
 }
