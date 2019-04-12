@@ -10,6 +10,8 @@
 
    TODO:
     - set starting level (currently 1)
+    - save/load state
+    - save to SVG/PDF
    */
 
 import java.util.Queue;
@@ -80,7 +82,7 @@ void keyPressed() {
   }
 
   if (key == 'i') {
-    
+
     // invert colours in base colorset:
     int tmp = colors[0];
     colors[0] = colors[1];
