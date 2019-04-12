@@ -2,6 +2,8 @@
 
 This is an implementation in Processing of multiscale truchet patterns.
 
+![screenshot](multiscale-truchet-1.png)
+
 ## These are the keys/mouse controls:
 
  - 'r' - toggle show tiling
