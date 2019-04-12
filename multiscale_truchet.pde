@@ -36,11 +36,13 @@ void mousePressed() {
     qt.join(p);
   }
 }
+
 void mouseWheel(MouseEvent event) {
   float e = event.getCount();
   if (e<0) qt.scroll("UP");
   if (e>0) qt.scroll("DOWN");
 }
+
 void keyPressed() {
   if (key == ' ') {
     // re-initialise
