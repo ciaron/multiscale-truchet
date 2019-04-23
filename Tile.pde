@@ -5,11 +5,12 @@ class Tile {
 
    0: \    1: /   2: -   3: |   4: +.   5: x.   6: +
    7: fne  8: fsw   9: fnw  10: fse  11: tn  12: ts  13: te  14: tw
+   15: blank (xtra)
   */
 
   Rectangle boundary;
-  //int[] motifs = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14};
-  int[] motifs = {1,9,10};
+  int[] motifs = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+  //int[] motifs = {1,9,10};
   int motif;
   int idx_motif=1;
   int level;
@@ -135,10 +136,14 @@ class Tile {
         fill(this.colors[0]);
         rect(x - smallr/2, y, bigr, h);
         break;
+      case 15: // blank
+        fill(this.colors[0], this.colors[0], this.colors[0], 8);
+        //stroke(255,0,0);
+        rect(x,y,w,h);
+        break;
       default:
         println("Invalid motif");
     }
-
     fill(this.colors[1]);
     ellipse(x - w/2, y - h/2, bigr, bigr);
     ellipse(x + w/2, y - h/2, bigr, bigr);
@@ -150,5 +155,6 @@ class Tile {
     ellipse(x + w/2, y, smallr, smallr);
     ellipse(x, y + h/2, smallr, smallr);
     ellipse(x - w/2, y, smallr, smallr);
+
   }
 }
