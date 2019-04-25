@@ -19,7 +19,7 @@ import java.util.ArrayDeque;
 
 //enum TYPE {ROUND,SQUARE};
 
-Boolean SQUARE=true;
+Boolean SQUARE=false;
 
 int border = 132;
 Boolean showrect = false;
