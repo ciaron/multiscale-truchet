@@ -17,7 +17,11 @@
 import java.util.Queue;
 import java.util.ArrayDeque;
 
-int border = 120;
+//enum TYPE {ROUND,SQUARE};
+
+Boolean SQUARE=true;
+
+int border = 132;
 Boolean showrect = false;
 int tilesize;
 QuadTree qt;

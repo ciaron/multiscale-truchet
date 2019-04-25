@@ -9,8 +9,8 @@ class Tile {
   */
 
   Rectangle boundary;
-  int[] motifs = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14};
-  //int[] motifs = {1,9,10};
+  //int[] motifs = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14};
+  int[] motifs = {0,1};
   int motif;
   int idx_motif=1;
   int level;
@@ -83,6 +83,7 @@ class Tile {
     rect(x, y, w, h);
     fill(this.colors[0]); //fg
 
+if (!SQUARE) {
     switch(this.motif) {
       case 0: // '\'
         arc(x + w/2, y - h/2, arcd, arcd, PI / 2, PI);
@@ -139,6 +140,67 @@ class Tile {
       default:
         println("Invalid motif");
     }
+} else {
+    // SQUARED MOTIFS
+
+    PShape s;
+    smallr = 2*h/6;
+    switch(this.motif) {
+      case 0: // '\'
+        s = createShape();
+        s.setFill(this.colors[0]);
+        s.beginShape();
+
+        s.vertex(x+w/2, y-smallr/2);
+        s.vertex(x+w/2+smallr/2, y);
+        s.vertex(x, y+h/2+smallr/2);
+        s.vertex(x-smallr/2, y+h/2);
+        s.endShape(CLOSE);
+        shape(s);
+
+        s = createShape();
+        s.setFill(this.colors[0]);
+
+        s.beginShape();
+
+        s.vertex(x, y-h/2-smallr/2);
+        s.vertex(x+smallr/2, y-h/2);
+        s.vertex(x-w/2, y+smallr/2);
+        s.vertex(x-smallr/2-w/2, y);
+        s.endShape(CLOSE);
+        shape(s);
+
+        break;
+      case 1: // '/'
+        s = createShape();
+        s.setFill(this.colors[0]);
+        s.beginShape();
+
+        s.vertex(x, y-h/2-smallr/2);
+        s.vertex(x+w/2+smallr/2, y);
+        s.vertex(x+w/2, y+smallr/2);
+        s.vertex(x-smallr/2, y-h/2);
+        s.endShape(CLOSE);
+        shape(s);
+
+        s = createShape();
+        s.setFill(this.colors[0]);
+
+        s.beginShape();
+
+        s.vertex(x-w/2, y-smallr/2);
+        s.vertex(x+smallr/2, y+h/2);
+        s.vertex(x, y+h/2+smallr/2);
+        s.vertex(x-smallr/2-w/2, y);
+        s.endShape(CLOSE);
+        shape(s);
+        break;
+      default:
+        println("Invalid motif");
+    }
+}
+
+if (!SQUARE) {
     fill(this.colors[1]);
     ellipse(x - w/2, y - h/2, bigr, bigr);
     ellipse(x + w/2, y - h/2, bigr, bigr);
@@ -150,6 +212,6 @@ class Tile {
     ellipse(x + w/2, y, smallr, smallr);
     ellipse(x, y + h/2, smallr, smallr);
     ellipse(x - w/2, y, smallr, smallr);
-
+}
   }
 }
