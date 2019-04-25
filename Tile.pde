@@ -9,7 +9,7 @@ class Tile {
   */
 
   Rectangle boundary;
-  int[] motifs = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+  int[] motifs = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14};
   //int[] motifs = {1,9,10};
   int motif;
   int idx_motif=1;
@@ -47,7 +47,7 @@ class Tile {
     if (dir == "DOWN") idx_motif-=1;
     int n = motifs.length;
     motif = motifs[(idx_motif % n + n) % n];
-    //println(motif, dir);
+    println(motif, dir);
   }
 
   void outline() {
@@ -83,7 +83,7 @@ class Tile {
     rect(x, y, w, h);
     fill(this.colors[0]); //fg
 
-    switch(this.motif){
+    switch(this.motif) {
       case 0: // '\'
         arc(x + w/2, y - h/2, arcd, arcd, PI / 2, PI);
         arc(x - w/2, y + h/2, arcd, arcd, 3 * PI / 2, 2 * PI);
@@ -135,11 +135,6 @@ class Tile {
       case 14: // 'tw'
         fill(this.colors[0]);
         rect(x - smallr/2, y, bigr, h);
-        break;
-      case 15: // blank
-        fill(this.colors[0], this.colors[0], this.colors[0], 8);
-        //stroke(255,0,0);
-        rect(x,y,w,h);
         break;
       default:
         println("Invalid motif");
