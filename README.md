@@ -29,7 +29,7 @@ Original paper on multi-scale truchet patterns:
    Proceedings of Bridges 2018: Mathematics, Art, Music, Architecture, Education, Culture
 
    Inspiration and coding help from the JavaScript version here:
-      https://editor.p5js.org/Varyter/sketches/j23pb7_ua
+      ~~https://editor.p5js.org/Varyter/sketches/j23pb7_ua~~ (dead link)
 
    and Dan Shiffman's QuadTree Coding Train videos:
       https://www.youtube.com/watch?v=OJxEcs0w_kE
